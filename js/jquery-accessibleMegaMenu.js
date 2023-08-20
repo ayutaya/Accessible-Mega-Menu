@@ -602,6 +602,13 @@ limitations under the License.
                     found = (tabbables.filter(':lt(' + i + '):last').focus().length === 1);
                 } else if (!event.shiftKey && i < tabbables.length - 1) {
                     found = (tabbables.filter(':gt(' + i + '):first').focus().length === 1);
+                } else if (!event.shiftKey && i >= tabbables.length - 1) {
+                    // tabbableの最後の要素から移動しようとしていて
+                    // パネルが開いている場合
+                    if(menu.find('.' + settings.topNavItemClass + ' .' + settings.openClass).length > 0) {
+                        // 先頭タブをフォーカスする指示
+                        found = (tabbables.filter(':first:first').focus().length === 1);
+                    }
                 } else if (isOpera) {
                     tabbables = $(':tabbable');
                     i = tabbables.index(target);
